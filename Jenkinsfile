@@ -12,4 +12,15 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            echo 'Generating Allure Report'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'target/allure-results']]
+            ])
+        }
+    }
 }
