@@ -24,15 +24,26 @@ public class DriverFactory {
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final Logger logger = LogManager.getLogger();
 
-    public Properties prop;
+    public static Properties getProp() {
+        return prop;
+    }
+
+    private static Properties prop;
 
     public OptionsManager optionsManager;
 
+    public static void quitDriver() {
+        getDriver().quit();
+        driver.remove();
+    }
+
     /*initialize the driver on the basis of browser
      * return driver*/
+//    public WebDriver initDriver() {
     public WebDriver initDriver(Properties prop) {
         String browser = prop.getProperty("browser");
         logger.info("Browser name: {}", browser);
+        optionsManager = new OptionsManager(prop);
 
         boolean remoteExecution = Boolean.parseBoolean(prop.getProperty("remote"));
 
@@ -109,7 +120,7 @@ public class DriverFactory {
         return driver.get();
     }
 
-    public Properties initProp() throws FileNotFoundException {
+    public static Properties initProp() throws FileNotFoundException {
         prop = new Properties();
         FileInputStream ip = null;
         String envName = System.getProperty("env");

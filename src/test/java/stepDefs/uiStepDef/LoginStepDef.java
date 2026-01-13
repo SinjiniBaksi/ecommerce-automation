@@ -1,4 +1,4 @@
-package stepDefs;
+package stepDefs.uiStepDef;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

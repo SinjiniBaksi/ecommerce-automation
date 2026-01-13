@@ -1,4 +1,4 @@
-package stepDefs;
+package stepDefs.uiStepDef;
 
 public class CheckoutStepDef {
 }
